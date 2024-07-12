@@ -42,14 +42,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # Local
-    'accounts.apps.AccountsConfig',
-    'pages.apps.PagesConfig',
     # Third-party
     "crispy_forms",
     "crispy_bootstrap5",
     'allauth',
     'allauth.account',
+    # Local
+    'accounts.apps.AccountsConfig',
+    'pages.apps.PagesConfig',
+    'books.apps.BooksConfig',
 ]
 
 # django-allauth config
@@ -59,8 +60,8 @@ SITE_ID = 1
 AUTHENTICATION_BACKENDS = (
     "django.contrib.auth.backends.ModelBackend",
     "allauth.account.auth_backends.AuthenticationBackend",  
-)
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+)   
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 ACCOUNT_SESSION_REMEMBER = True
 ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = True
 
@@ -68,6 +69,8 @@ ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_AUTHENTICATION_METHOD = "email"  
 ACCOUNT_EMAIL_REQUIRED = True 
 ACCOUNT_UNIQUE_EMAIL = True 
+
+DEFAULT_FROM_EMAIL = "admin@djangobookstore.com"
 
 # django-crispy-forms
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
@@ -158,6 +161,9 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / "static"]
 STATIC_ROOT = BASE_DIR / "staticfiles"
 STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage"  
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
